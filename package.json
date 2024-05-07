@@ -18,6 +18,7 @@
     "@types/luxon": "^3.4.2",
     "@types/tgwf__co2": "^0.0.0",
     "axios": "^1.6.0",
+    "dayjs": "^1.11.11",
     "dotenv": "16.3.1",
     "js-yaml": "^4.1.0",
     "luxon": "^3.4.4",
