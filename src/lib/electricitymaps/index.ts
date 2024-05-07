@@ -6,22 +6,24 @@ import axios from 'axios';
 import {ERRORS} from '../../util/errors';
 import {buildErrorMessage} from '../../util/helpers';
 
-import {KeyValuePair, ModelParams} from '../../types/common';
-import {ModelPluginInterface} from '../../interfaces';
+import {KeyValuePair, PluginParams} from '../../types/common';
+import {PluginInterface} from '../../interfaces';
 
 
 const {AuthorizationError, InputValidationError, APIRequestError} = ERRORS;
 
 const BASE_URL = 'https://api.electricitymap.org/v3';
 
-export class ElectricityMapsModel implements ModelPluginInterface {
+export class ElectricityMaps implements PluginInterface {
+
+    metadata = {kind: 'execute'};
     authorizationHeader = '';
-    errorBuilder = buildErrorMessage(ElectricityMapsModel);
-    async configure(): Promise<ModelPluginInterface> {
+    errorBuilder = buildErrorMessage(ElectricityMaps.name);
+    async configure(): Promise<PluginInterface> {
             this.initAuth();
             return this;
     }
-    async execute(inputs: ModelParams[]): Promise<ModelParams[]> {
+    async execute(inputs: PluginParams[]): Promise<PluginParams[]> {
             return inputs.map((model_param)=>{
                 let unit = 'gCO2eq/kWh';
                 let power_consumption = model_param.power_consumption;
